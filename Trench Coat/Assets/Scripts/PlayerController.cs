@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 
     NavMeshAgent agent;
     GameObject collidedWith;
+    GameObject trenchCoat;
 
     public enum State {
         Idle,
@@ -65,6 +66,10 @@ public class PlayerController : MonoBehaviour {
                 collidedWith = null;
             }
         }
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            if (trenchCoat != null)
+                trenchCoat.GetComponent<TrenchCoat>().ExitLevel();
+        }
     }
 
     public void Detained(){
@@ -85,6 +90,9 @@ public class PlayerController : MonoBehaviour {
         else if(other.gameObject.layer == 9){
             SwitchPlayer _sp = GameObject.Find("Player Group").GetComponent<SwitchPlayer>();
             _sp.AddChild(this.gameObject.GetComponent<PlayerController>());
+        }
+        else if(other.gameObject.tag == "Trench Coat"){
+            trenchCoat = other.gameObject;
         }
 
 
