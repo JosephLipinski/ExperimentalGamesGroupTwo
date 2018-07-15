@@ -67,12 +67,27 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void Detained(){
+        collectedObjects.Clear();
+        agent.SetDestination(GameObject.Find("Back Room").transform.position);
+        SwitchPlayer _sp = GameObject.Find("Player Group").GetComponent<SwitchPlayer>();
+        _sp.RemoveChild(this.gameObject.GetComponent<PlayerController>());
+    }
+
     public void SetState(State _passedState){
         _state = _passedState;
     }
 
     void OnTriggerEnter(Collider other){
-        collidedWith = other.gameObject;
+        if(other.gameObject.layer == 11){
+            collidedWith = other.gameObject;    
+        }
+        else if(other.gameObject.layer == 9){
+            SwitchPlayer _sp = GameObject.Find("Player Group").GetComponent<SwitchPlayer>();
+            _sp.AddChild(this.gameObject.GetComponent<PlayerController>());
+        }
+
+
     }
 
     private void OnTriggerExit(Collider other){

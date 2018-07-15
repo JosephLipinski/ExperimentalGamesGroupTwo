@@ -6,7 +6,8 @@ public class SwitchPlayer : MonoBehaviour {
     
     GameObject PlayerGroup;
     GameObject R, B, G;
-    public PlayerController rScript, gScript, bScript;
+    public List<PlayerController> children;
+    PlayerController rScript, gScript, bScript;
     public int character = 0;
     public Camera _mainCamera;
 
@@ -23,6 +24,9 @@ public class SwitchPlayer : MonoBehaviour {
         B = PlayerGroup.transform.GetChild(2).gameObject;GetComponent<PlayerController>();
         bScript = B.GetComponent<PlayerController>();
 
+        children.Add(rScript);
+        children.Add(bScript);
+        children.Add(gScript);
         SetActive();
     }
 
@@ -33,13 +37,13 @@ public class SwitchPlayer : MonoBehaviour {
                 character--;
                 SetActive();
             } else {
-                character = 2;
+                character = children.Count - 1;
                 SetActive();
             }
 
         }
         else if(Input.GetKeyDown(KeyCode.E)){
-            if (character < 2){
+            if (character < children.Count - 1){
                 character++;
                 SetActive();
             } else {
@@ -50,25 +54,26 @@ public class SwitchPlayer : MonoBehaviour {
 	}
 
     void SetActive(){
-        switch(character){
-            case 0:
-                rScript.SetState(PlayerController.State.Move);
-                bScript.SetState(PlayerController.State.Idle);
-                gScript.SetState(PlayerController.State.Idle);
-                break;
-            case 1:
-                rScript.SetState(PlayerController.State.Idle);
-                bScript.SetState(PlayerController.State.Move);
-                gScript.SetState(PlayerController.State.Idle);
-                break;
-            case 2:
-                rScript.SetState(PlayerController.State.Idle);
-                bScript.SetState(PlayerController.State.Idle);
-                gScript.SetState(PlayerController.State.Move);
-                break;
+        int i = 0;
+        foreach (PlayerController child in children){
+            if (i == character)
+            {
+                child.SetState(PlayerController.State.Move);
+            }
+            else{
+                child.SetState(PlayerController.State.Idle);
+            }
+            i++;
         }
-
     }
 
+    public void RemoveChild(PlayerController _pc){
+        children.Remove(_pc);
+    }
 
+    public void AddChild(PlayerController _pc){
+        if(children.Contains(_pc) == false){
+            children.Add(_pc);
+        }
+    }
 }
