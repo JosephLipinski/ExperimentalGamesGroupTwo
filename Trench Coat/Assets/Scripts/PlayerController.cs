@@ -20,7 +20,8 @@ public class PlayerController : MonoBehaviour {
         Move
     }
 
-    State _state;
+    [HideInInspector]
+    public State _state;
 
 	// Use this for initialization
 	void Start () {

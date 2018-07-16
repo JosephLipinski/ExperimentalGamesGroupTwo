@@ -4,29 +4,21 @@ using UnityEngine;
 
 public class SwitchPlayer : MonoBehaviour {
     
-    GameObject PlayerGroup;
-    GameObject R, B, G;
+    //The list of all of the available player scripts
     public List<PlayerController> children;
-    PlayerController rScript, gScript, bScript;
-    public int character = 0;
+    //The main camera
     public Camera _mainCamera;
+
+    //The scripts attached to each of the players
+    PlayerController rScript, gScript, bScript;
+    //A reference to which character should be active first as int
+    int character = 0;
 
     private void Start()
     {
-        PlayerGroup = this.gameObject;
-
-        R = PlayerGroup.transform.GetChild(0).gameObject;
-        rScript = R.GetComponent<PlayerController>();
-
-        G = PlayerGroup.transform.GetChild(1).gameObject;
-        gScript = G.GetComponent<PlayerController>();
-
-        B = PlayerGroup.transform.GetChild(2).gameObject;GetComponent<PlayerController>();
-        bScript = B.GetComponent<PlayerController>();
-
-        children.Add(rScript);
-        children.Add(bScript);
-        children.Add(gScript);
+        children.Add(transform.GetChild(0).gameObject.GetComponent<PlayerController>());
+        children.Add(transform.GetChild(1).gameObject.GetComponent<PlayerController>());
+        children.Add(transform.GetChild(2).gameObject.GetComponent<PlayerController>());
         SetActive();
     }
 
@@ -35,22 +27,20 @@ public class SwitchPlayer : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Q)){
             if(character > 0){
                 character--;
-                SetActive();
             } else {
                 character = children.Count - 1;
-                SetActive();
             }
-
+            SetActive();
         }
         else if(Input.GetKeyDown(KeyCode.E)){
             if (character < children.Count - 1){
                 character++;
-                SetActive();
             } else {
                 character = 0;
-                SetActive();
             }
+            SetActive();
         }
+
 	}
 
     void SetActive(){
