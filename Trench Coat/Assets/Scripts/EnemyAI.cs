@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour
     public State _state;
 
     //The patrol point to which the AI should walk
-    GameObject patrolPoint;
+    public GameObject patrolPoint;
     //The position of the patrol point
     Vector3 patrolPointVector;
     //The box collider attached to the AI
@@ -96,7 +96,7 @@ public class EnemyAI : MonoBehaviour
     //All necessary trigger handling
     private void OnTriggerEnter(Collider other)
     {
-        if(_state != State.Detain){
+        if(_state != State.Detain && _state != State.Move){
             if (other.gameObject.tag == "PatrolPoint")
             {
                 if (other.gameObject == patrolPoint)
@@ -115,7 +115,7 @@ public class EnemyAI : MonoBehaviour
         }
         if(other.gameObject.layer == 12){
             StartCoroutine(TurnOffCollider());
-            _state = State.Idle;
+            _state = State.Move;
         }
 
     }

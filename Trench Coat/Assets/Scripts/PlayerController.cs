@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector]
     public Camera _camera;
 
+    GameObject PlayerGroup;
     NavMeshAgent agent;
     GameObject collidedWith;
     GameObject trenchCoat;
@@ -20,14 +21,17 @@ public class PlayerController : MonoBehaviour {
         Move
     }
 
-    [HideInInspector]
+    //[HideInInspector]
     public State _state;
 
 	// Use this for initialization
 	void Start () {
         StartCoroutine(FSM());
         agent = GetComponent<NavMeshAgent>();
-	}
+        //if (transform.GetChild(0) != null){
+        //    trenchCoat = this.gameObject;
+        //}	
+    }
 
     IEnumerator FSM(){
         while(true){
@@ -60,17 +64,16 @@ public class PlayerController : MonoBehaviour {
     }
 
     void ReadInput(){
+        
+        /*
         if(Input.GetKeyDown(KeyCode.Space)){
-            if(collidedWith != null){
-                collectedObjects.Add(collidedWith);
-                collidedWith.GetComponent<Collectible>().Collect();
-                collidedWith = null;
-            }
+            
         }
         if(Input.GetKeyDown(KeyCode.Escape)){
             if (trenchCoat != null)
                 trenchCoat.GetComponent<TrenchCoat>().ExitLevel();
         }
+        */
     }
 
     public void Detained(){
@@ -86,11 +89,17 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.layer == 11){
-            collidedWith = other.gameObject;    
+            collidedWith = other.gameObject;
+            collectedObjects.Add(collidedWith);
+            collidedWith.GetComponent<Collectible>().Collect();
+            collidedWith = null;    
         }
         else if(other.gameObject.layer == 9){
-            SwitchPlayer _sp = GameObject.Find("Player Group").GetComponent<SwitchPlayer>();
-            _sp.AddChild(this.gameObject.GetComponent<PlayerController>());
+            if(other.gameObject.GetComponent<PlayerController>()._state != PlayerController.State.Idle){
+                SwitchPlayer _sp = GameObject.Find("Player Group").GetComponent<SwitchPlayer>();
+                _sp.AddChild(this.gameObject.GetComponent<PlayerController>());    
+            }
+
         }
         else if(other.gameObject.tag == "Trench Coat"){
             trenchCoat = other.gameObject;
