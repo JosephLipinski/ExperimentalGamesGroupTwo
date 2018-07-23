@@ -6078,6 +6078,12 @@ Prefab:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 282840813}
+    - target: {fileID: 114393228784151288, guid: 24e1d0c4926bcee46b6f304f57ee565b,
+        type: 2}
+      propertyPath: alarmClock
+      value: 
+      objectReference: {fileID: 1788610058043896, guid: fee7e4b9808d1324d84348f6a1fe3ac3,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24e1d0c4926bcee46b6f304f57ee565b, type: 2}
   m_IsPrefabParent: 0
@@ -6203,6 +6209,89 @@ Prefab:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 282840813}
+    - target: {fileID: 114706133618622874, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: alarmClock
+      value: 
+      objectReference: {fileID: 1788610058043896, guid: fee7e4b9808d1324d84348f6a1fe3ac3,
+        type: 2}
+    - target: {fileID: 33329356822700902, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 9648d1b768d32c54989d427a5b7793c7, type: 3}
+    - target: {fileID: 4712747033151580, guid: faf3c9b56ff58b44b8f275690c651f0f, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4712747033151580, guid: faf3c9b56ff58b44b8f275690c651f0f, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4712747033151580, guid: faf3c9b56ff58b44b8f275690c651f0f, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65632538442716848, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.495569
+      objectReference: {fileID: 0}
+    - target: {fileID: 65632538442716848, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Center.x
+      value: 0.004272312
+      objectReference: {fileID: 0}
+    - target: {fileID: 65632538442716848, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.251737
+      objectReference: {fileID: 0}
+    - target: {fileID: 65632538442716848, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 0.014949203
+      objectReference: {fileID: 0}
+    - target: {fileID: 65400491180753810, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.49619794
+      objectReference: {fileID: 0}
+    - target: {fileID: 65400491180753810, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Center.x
+      value: 0.00000008940697
+      objectReference: {fileID: 0}
+    - target: {fileID: 65400491180753810, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.25205028
+      objectReference: {fileID: 0}
+    - target: {fileID: 65400491180753810, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 0.010681033
+      objectReference: {fileID: 0}
+    - target: {fileID: 65632538442716848, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 0.2779901
+      objectReference: {fileID: 0}
+    - target: {fileID: 65400491180753810, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 0.28654504
+      objectReference: {fileID: 0}
+    - target: {fileID: 65632538442716848, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.32499057
+      objectReference: {fileID: 0}
+    - target: {fileID: 65400491180753810, guid: faf3c9b56ff58b44b8f275690c651f0f,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.32499045
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: faf3c9b56ff58b44b8f275690c651f0f, type: 2}
   m_IsPrefabParent: 0
@@ -8969,6 +9058,12 @@ Prefab:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 282840813}
+    - target: {fileID: 114429362202967484, guid: ea5c4f269b3457e4498eef3399aaf00d,
+        type: 2}
+      propertyPath: alarmClock
+      value: 
+      objectReference: {fileID: 1788610058043896, guid: fee7e4b9808d1324d84348f6a1fe3ac3,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea5c4f269b3457e4498eef3399aaf00d, type: 2}
   m_IsPrefabParent: 0
