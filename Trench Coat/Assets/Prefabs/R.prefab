@@ -19,13 +19,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4263909885742912}
-  - component: {fileID: 33884091293934950}
-  - component: {fileID: 23727905889450696}
-  - component: {fileID: 65847712357319572}
   - component: {fileID: 114429362202967484}
-  - component: {fileID: 195095972287104586}
   - component: {fileID: 54631872500842458}
   - component: {fileID: 65231129204755128}
+  - component: {fileID: 65847712357319572}
+  - component: {fileID: 195095972287104586}
+  - component: {fileID: 33884091293934950}
+  - component: {fileID: 23727905889450696}
   m_Layer: 9
   m_Name: R
   m_TagString: Player
@@ -40,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1065955076350392}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.384, y: 0.18889403, z: 0.21513538}
+  m_LocalPosition: {x: 0.473, y: 0.17, z: 0.21513538}
   m_LocalScale: {x: 0.3, y: 0.29999995, z: 0.29999995}
   m_Children: []
   m_Father: {fileID: 0}
@@ -140,6 +140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectedObjects: []
   _camera: {fileID: 0}
+  alarmClock: {fileID: 1276265722116140, guid: 8a912e8d45e8d4479ba3291f303290e8, type: 2}
+  _state: 0
 --- !u!195 &195095972287104586
 NavMeshAgent:
   m_ObjectHideFlags: 1

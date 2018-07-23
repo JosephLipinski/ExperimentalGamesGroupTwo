@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PatrolPoint
   - Trench Coat
+  - Alarm Clock
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Adult
   - Collectible
   - Back Room
-  - 
+  - Trench Coat
   - 
   - 
   - 

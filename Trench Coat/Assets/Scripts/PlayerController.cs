@@ -7,14 +7,15 @@ public class PlayerController : MonoBehaviour {
 
     [Header("An array of collected items")]
     public List<GameObject> collectedObjects;
-
-    [HideInInspector]
+    GameObject spawn;
+    GameObject TrenchCoat;
     public Camera _camera;
-
+    public GameObject alarmClock;
     GameObject PlayerGroup;
+    SwitchPlayer _sP;
     NavMeshAgent agent;
     GameObject collidedWith;
-    GameObject trenchCoat;
+
 
     public enum State {
         Idle,
@@ -25,9 +26,13 @@ public class PlayerController : MonoBehaviour {
     public State _state;
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
         StartCoroutine(FSM());
         agent = GetComponent<NavMeshAgent>();
+        TrenchCoat = GameObject.Find("Player Group/Trench Coat");
+        PlayerGroup = GameObject.Find("Player Group");
+        _sP = PlayerGroup.GetComponent<SwitchPlayer>();
+
         //if (transform.GetChild(0) != null){
         //    trenchCoat = this.gameObject;
         //}	
@@ -48,12 +53,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Idle(){
-        
+        if (Input.GetKeyDown(KeyCode.T) && _sP.children.Contains(this.gameObject.GetComponent<PlayerController>()))
+        {
+            agent.SetDestination(TrenchCoat.transform.position);
+            transform.SetParent(TrenchCoat.transform);
+        }
     }
 
     void Move(){
         ReadInput();
         if(Input.GetMouseButtonDown(0)){
+
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -64,16 +74,19 @@ public class PlayerController : MonoBehaviour {
     }
 
     void ReadInput(){
-        
-        /*
-        if(Input.GetKeyDown(KeyCode.Space)){
-            
+
+        if(Input.GetKeyDown(KeyCode.F)){
+            if (spawn != null)
+                Destroy(spawn);
+            spawn = Instantiate(alarmClock);
+            spawn.transform.position = transform.position;
+
         }
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            if (trenchCoat != null)
-                trenchCoat.GetComponent<TrenchCoat>().ExitLevel();
+
+        if (Input.GetKeyDown(KeyCode.T)){
+            agent.SetDestination(TrenchCoat.transform.position);
+            transform.SetParent(TrenchCoat.transform);
         }
-        */
     }
 
     public void Detained(){
@@ -101,14 +114,16 @@ public class PlayerController : MonoBehaviour {
             }
 
         }
-        else if(other.gameObject.tag == "Trench Coat"){
-            trenchCoat = other.gameObject;
-        }
 
 
     }
 
     private void OnTriggerExit(Collider other){
         collidedWith = null;
+    }
+
+    public void SetCamera(Camera passedCamera){
+        //Debug.Log("HERE");
+        _camera = passedCamera;
     }
 }

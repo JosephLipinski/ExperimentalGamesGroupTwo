@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
     {
         Idle,
         Move,
+        Investigate,
         Pursue,
         Detain
     }
@@ -19,6 +20,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject backRoom;
     //The patrol path an adult is supposed to take
     public GameObject patrolPath;
+
 
     [Header("Current State")]
     //The state of the AI
@@ -36,6 +38,7 @@ public class EnemyAI : MonoBehaviour
     GameObject chasing;
     //Cooldown between chasing a player
     float chaseTime = 4.0f;
+    GameObject weirdObject;
 
     //Initializes all private variables
     private void Start()
@@ -43,9 +46,8 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         patrolPoint = patrolPath.transform.GetChild(0).gameObject;
         patrolPointVector = patrolPoint.gameObject.transform.position;
-        agent.SetDestination(patrolPointVector);
-        _state = State.Idle;
         boxCollider = GetComponent<BoxCollider>();
+        _state = State.Move;
         StartCoroutine(FSM());
     }
 
@@ -78,8 +80,16 @@ public class EnemyAI : MonoBehaviour
     //Idle and Move are both empty behavior methods
     void Idle() { }
 
-    void Move() { 
-      
+    void Move() {
+        agent.SetDestination(patrolPointVector);
+    }
+
+    void Investigate(){
+        agent.SetDestination(weirdObject.transform.position);
+        if(weirdObject == null){
+            Debug.Log("HOOOO");
+        }
+
     }
 
     //Set the AI to move towards to the chasing gameobject
@@ -89,14 +99,14 @@ public class EnemyAI : MonoBehaviour
 
     //Causes the AI to go to the back room and "escort" the captured player there
     void Detain(){
-        StopCoroutine(ChaseCoolDown());
+        //StopCoroutine(ChaseCoolDown());
         agent.SetDestination(backRoom.transform.position);
     }
 
     //All necessary trigger handling
     private void OnTriggerEnter(Collider other)
     {
-        if(_state != State.Detain && _state != State.Move){
+        if(_state == State.Move){
             if (other.gameObject.tag == "PatrolPoint")
             {
                 if (other.gameObject == patrolPoint)
@@ -110,26 +120,29 @@ public class EnemyAI : MonoBehaviour
             {
                 _state = State.Pursue;
                 chasing = other.gameObject;
-                agent.SetDestination(chasing.transform.position);
+            }
+
+            if(other.gameObject.tag == "Alarm Clock")
+            {
+                weirdObject = other.gameObject;
+                _state = State.Investigate;
+                //agent.SetDestination(other.gameObject.transform.position);
             }
         }
-        if(other.gameObject.layer == 12){
-            StartCoroutine(TurnOffCollider());
-            _state = State.Move;
+        if(_state == State.Detain){
+            if (other.gameObject.layer == 12){
+                StartCoroutine(TurnOffCollider());
+                _state = State.Move;
+            }
         }
 
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        StopCoroutine(ChaseCoolDown());
-        StartCoroutine(ChaseCoolDown());
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Player" && _state != State.Detain){
-            StopCoroutine(ChaseCoolDown());
+            //StopCoroutine(ChaseCoolDown());
             _state = State.Detain;
             PlayerController _pc = collision.gameObject.GetComponent<PlayerController>();
             _pc.SetState(PlayerController.State.Idle);
@@ -140,6 +153,10 @@ public class EnemyAI : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         
+    }
+
+    public void SetState(State passedState){
+        _state = passedState;
     }
 
     //Currently unused

@@ -6,11 +6,7 @@ public class SwitchPlayer : MonoBehaviour {
     
     //The list of all of the available player scripts
     public List<PlayerController> children;
-    //The main camera
-    public Camera _mainCamera;
 
-    //The scripts attached to each of the players
-    PlayerController rScript, gScript, bScript;
     //A reference to which character should be active first as int
     int character = 0;
 
@@ -65,5 +61,13 @@ public class SwitchPlayer : MonoBehaviour {
         if(children.Contains(_pc) == false){
             children.Add(_pc);
         }
+    }
+
+    public void SetCamera(Camera _camera){
+        foreach(PlayerController child in children){
+            child.SetCamera(_camera);
+        }
+        GameObject.Find("Player Group/Trench Coat").GetComponent<TrenchCoatController>().SetCamera(_camera);
+      
     }
 }
