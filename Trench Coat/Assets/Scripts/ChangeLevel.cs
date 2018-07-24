@@ -28,7 +28,7 @@ public class ChangeLevel : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("hit");
+        Debug.Log("hit");
         if(other.gameObject.name == "Trench Coat"){
             ItemManager _iM = GameObject.Find("ItemManager").GetComponent<ItemManager>();
 
